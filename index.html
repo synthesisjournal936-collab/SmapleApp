@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI Automation Test Application - Enterprise Company Management, Billing Terms, and Workflow Testing">
+  <title>NexusOps AI - Automation Testing Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+
+  <!-- ========================================================================= -->
+  <!-- 1. LOGIN VIEW                                                             -->
+  <!-- ========================================================================= -->
+  <section id="view-login" class="login-wrapper">
+    <div class="login-card" data-testid="login-card">
+      <div class="brand-header">
+        <div class="brand-badge">Automation Test Suite</div>
+        <h1 class="brand-title">NexusOps Portal</h1>
+        <p class="brand-subtitle">Sign in to manage companies and automation flows</p>
+      </div>
+
+      <div id="login-alert" class="alert-message alert-error view-hidden" data-testid="login-error"></div>
+
+      <form id="form-login" class="auth-form" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="login-email">Mail ID</label>
+          <div class="input-container">
+            <span class="input-icon">
+              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            </span>
+            <input 
+              type="email" 
+              id="login-email" 
+              name="email" 
+              class="form-control" 
+              placeholder="admin@nexusops.io" 
+              required 
+              data-testid="login-email"
+              autocomplete="email"
+            >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="login-password">Password</label>
+          <div class="input-container">
+            <span class="input-icon">
+              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            </span>
+            <input 
+              type="password" 
+              id="login-password" 
+              name="password" 
+              class="form-control" 
+              placeholder="••••••••" 
+              required 
+              data-testid="login-password"
+              autocomplete="current-password"
+            >
+          </div>
+        </div>
+
+        <div class="form-row-compact">
+          <label class="checkbox-label" for="login-remember">
+            <input 
+              type="checkbox" 
+              id="login-remember" 
+              name="remember" 
+              class="checkbox-input" 
+              data-testid="login-remember"
+            >
+            <span>Remember me</span>
+          </label>
+        </div>
+
+        <button 
+          type="submit" 
+          id="login-submit-btn" 
+          class="btn-primary" 
+          data-testid="login-submit-btn"
+        >
+          <span>Sign In</span>
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </button>
+      </form>
+
+      <div class="demo-credentials">
+        <strong>Demo Test Account:</strong> <code>admin@nexusops.io</code> / <code>demo123</code>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 2. MAIN APP SHELL                                                         -->
+  <!-- ========================================================================= -->
+  <div id="view-app" class="app-container view-hidden" data-testid="app-container">
+
+    <!-- SIDEBAR -->
+    <aside class="app-sidebar" id="sidebar" data-testid="sidebar">
+      <div class="sidebar-top">
+        <div class="app-brand">
+          <div class="brand-icon-box">N</div>
+          <div class="brand-text">
+            <h2>NexusOps</h2>
+            <span>Enterprise Suite</span>
+          </div>
+        </div>
+
+        <nav>
+          <ul class="nav-menu">
+            <li>
+              <button class="nav-item active" id="nav-dashboard" data-testid="nav-dashboard">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                <span>Main Dashboard</span>
+              </button>
+            </li>
+            <li>
+              <button class="nav-item" id="nav-settings" data-testid="nav-settings">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                <span>Settings</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Persistent Logout at Bottom of Sidebar -->
+      <div class="sidebar-bottom">
+        <button id="btn-logout" class="btn-logout" data-testid="btn-logout" title="Sign out of the application">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT WRAPPER -->
+    <div class="main-wrapper">
+      
+      <!-- TOP BAR -->
+      <header class="app-topbar">
+        <div class="topbar-left">
+          <span id="current-view-title" style="font-weight: 600; color: #fff; font-size: 1.1rem;">Dashboard</span>
+        </div>
+        <div class="topbar-right">
+          <div class="user-profile-badge">
+            <div class="user-avatar" id="header-user-avatar">A</div>
+            <span id="header-user-email" style="color: #D1D5DB; font-weight: 500;">admin@nexusops.io</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- VIEW MODULES -->
+      <main class="content-container">
+
+        <!-- ========================================================================= -->
+        <!-- MODULE: DASHBOARD                                                         -->
+        <!-- ========================================================================= -->
+        <section id="module-dashboard" class="app-module" data-testid="module-dashboard">
+          
+          <div class="module-header">
+            <div class="module-title">
+              <h1>Company Directory</h1>
+              <p>Manage enterprise clients, contacts, and custom billing arrangements</p>
+            </div>
+            
+            <!-- Add Company button on the right top corner -->
+            <button id="btn-add-company" class="btn-primary" data-testid="btn-add-company">
+              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+              <span>Add Company</span>
+            </button>
+          </div>
+
+          <!-- Stats Overview -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon indigo">🏢</div>
+              <div class="stat-info">
+                <h3 id="stat-total-companies">3</h3>
+                <span>Total Companies</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon cyan">📅</div>
+              <div class="stat-info">
+                <h3 id="stat-active-terms">3</h3>
+                <span>Billing Terms Available</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon emerald">⚡</div>
+              <div class="stat-info">
+                <h3 id="stat-system-status">Active</h3>
+                <span>Automation Status</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Company List Table Card -->
+          <div class="table-card">
+            <div class="table-toolbar">
+              <div class="search-box">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                <input type="text" id="table-search-input" placeholder="Search company by name, email, or billing term..." data-testid="table-search-input">
+              </div>
+              <button id="btn-reset-data" class="btn-secondary" style="font-size: 0.8rem; padding: 6px 12px;" data-testid="btn-reset-data" title="Reset sample test data">
+                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                <span>Reset Sample Data</span>
+              </button>
+            </div>
+
+            <div class="table-responsive">
+              <table class="custom-table" id="company-table" data-testid="company-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Name of the company</th>
+                    <th scope="col">Mail id</th>
+                    <th scope="col">Number</th>
+                    <th scope="col">Billing term</th>
+                    <th scope="col" style="text-align: right;">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="company-table-body" data-testid="company-table-body">
+                  <!-- Dynamically Rendered Company Rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- MODULE: ADD / EDIT COMPANY FORM                                           -->
+        <!-- ========================================================================= -->
+        <section id="module-company-form" class="app-module view-hidden" data-testid="module-company-form">
+          <div class="form-card">
+            <div class="form-header-bar">
+              <div>
+                <h2 id="form-module-title" data-testid="form-title">Create New Company</h2>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 4px;">Fill in the details below to register or update the company profile</p>
+              </div>
+              <button type="button" id="btn-close-form" class="btn-secondary" data-testid="btn-close-form" style="padding: 8px 12px;">
+                ✕ Back to Dashboard
+              </button>
+            </div>
+
+            <div id="company-form-alert" class="alert-message alert-error view-hidden" data-testid="company-form-error"></div>
+
+            <form id="form-company" novalidate>
+              <input type="hidden" id="company-id" name="companyId">
+
+              <div class="form-grid-2">
+                <!-- Company Name -->
+                <div class="form-group">
+                  <label class="form-label" for="company-name">Name of the company <span style="color: var(--danger);">*</span></label>
+                  <div class="input-container">
+                    <span class="input-icon">🏢</span>
+                    <input 
+                      type="text" 
+                      id="company-name" 
+                      name="name" 
+                      class="form-control" 
+                      placeholder="e.g. Acme Corporation" 
+                      required 
+                      data-testid="company-name"
+                    >
+                  </div>
+                </div>
+
+                <!-- Mail ID -->
+                <div class="form-group">
+                  <label class="form-label" for="company-email">Mail ID <span style="color: var(--danger);">*</span></label>
+                  <div class="input-container">
+                    <span class="input-icon">✉️</span>
+                    <input 
+                      type="email" 
+                      id="company-email" 
+                      name="email" 
+                      class="form-control" 
+                      placeholder="e.g. billing@acme.com" 
+                      required 
+                      data-testid="company-email"
+                    >
+                  </div>
+                </div>
+
+                <!-- Phone Number -->
+                <div class="form-group">
+                  <label class="form-label" for="company-phone">Phone Number <span style="color: var(--danger);">*</span></label>
+                  <div class="input-container">
+                    <span class="input-icon">📞</span>
+                    <input 
+                      type="tel" 
+                      id="company-phone" 
+                      name="phone" 
+                      class="form-control" 
+                      placeholder="e.g. +1 (555) 019-2834" 
+                      required 
+                      data-testid="company-phone"
+                    >
+                  </div>
+                </div>
+
+                <!-- Billing Terms -->
+                <div class="form-group">
+                  <label class="form-label" for="company-billing-term">Billing Term <span style="color: var(--danger);">*</span></label>
+                  <div class="input-container">
+                    <select 
+                      id="company-billing-term" 
+                      name="billingTerm" 
+                      class="form-control select-control" 
+                      style="padding-left: 14px;" 
+                      required 
+                      data-testid="company-billing-term"
+                    >
+                      <!-- Dynamically Populated with Net 30, Net 45, Due on Date, custom options & + Add new net date -->
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Custom Net Term Input Container (Revealed when + Add new net date is selected) -->
+                <div id="custom-net-container" class="form-full-width custom-net-box view-hidden" data-testid="custom-net-container">
+                  <div style="flex: 1;">
+                    <label class="form-label" style="margin-bottom: 4px; font-size: 0.8rem; color: #A5B4FC;" for="custom-net-input">Enter Custom Net Billing Term</label>
+                    <input 
+                      type="text" 
+                      id="custom-net-input" 
+                      class="form-control" 
+                      placeholder="e.g. Net 60, Net 90, Net 120" 
+                      data-testid="custom-net-input"
+                    >
+                  </div>
+                  <button type="button" id="btn-save-custom-net" class="btn-primary" style="padding: 10px 16px; margin-top: 18px;" data-testid="btn-save-custom-net">
+                    + Add Term
+                  </button>
+                </div>
+
+                <!-- Address Line 1 -->
+                <div class="form-group form-full-width">
+                  <label class="form-label" for="company-address1">Address Line 1 <span style="color: var(--danger);">*</span></label>
+                  <div class="input-container">
+                    <span class="input-icon">📍</span>
+                    <input 
+                      type="text" 
+                      id="company-address1" 
+                      name="address1" 
+                      class="form-control" 
+                      placeholder="Street address, P.O. Box, company HQ" 
+                      required 
+                      data-testid="company-address1"
+                    >
+                  </div>
+                </div>
+
+                <!-- Address Line 2 -->
+                <div class="form-group form-full-width">
+                  <label class="form-label" for="company-address2">Address Line 2 (Optional)</label>
+                  <div class="input-container">
+                    <span class="input-icon">🏢</span>
+                    <input 
+                      type="text" 
+                      id="company-address2" 
+                      name="address2" 
+                      class="form-control" 
+                      placeholder="Apartment, suite, unit, building, floor, etc." 
+                      data-testid="company-address2"
+                    >
+                  </div>
+                </div>
+
+                <!-- Country -->
+                <div class="form-group">
+                  <label class="form-label" for="company-country">Country <span style="color: var(--danger);">*</span></label>
+                  <div class="input-container">
+                    <span class="input-icon">🌍</span>
+                    <input 
+                      type="text" 
+                      id="company-country" 
+                      name="country" 
+                      class="form-control" 
+                      placeholder="e.g. United States" 
+                      required 
+                      data-testid="company-country"
+                    >
+                  </div>
+                </div>
+
+                <!-- Pincode -->
+                <div class="form-group">
+                  <label class="form-label" for="company-pincode">Pincode / Postal Code <span style="color: var(--danger);">*</span></label>
+                  <div class="input-container">
+                    <span class="input-icon">📮</span>
+                    <input 
+                      type="text" 
+                      id="company-pincode" 
+                      name="pincode" 
+                      class="form-control" 
+                      placeholder="e.g. 94105" 
+                      required 
+                      data-testid="company-pincode"
+                    >
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Form Actions -->
+              <div class="form-actions">
+                <button type="button" id="btn-cancel-company" class="btn-secondary" data-testid="btn-cancel-company">
+                  Cancel
+                </button>
+                <button type="submit" id="btn-save-company" class="btn-primary" data-testid="btn-save-company">
+                  <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  <span id="btn-save-company-text">Create Company</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- MODULE: SETTINGS                                                          -->
+        <!-- ========================================================================= -->
+        <section id="module-settings" class="app-module view-hidden" data-testid="module-settings">
+          <div class="settings-card">
+            <h2 class="settings-section-title">Account & Credentials</h2>
+            <p class="settings-section-desc">View authenticated session credentials. Fields are protected and non-editable for security testing.</p>
+
+            <div class="auth-form">
+              <!-- Logged-in Mail ID (Non-editable / Grayed out) -->
+              <div class="form-group">
+                <label class="form-label" for="settings-email">
+                  <span>Mail ID</span>
+                  <span style="font-size: 0.75rem; color: #9CA3AF;">(Read-only)</span>
+                </label>
+                <div class="copy-input-wrapper">
+                  <div class="input-container" style="flex: 1;">
+                    <span class="input-icon">
+                      <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </span>
+                    <input 
+                      type="text" 
+                      id="settings-email" 
+                      class="form-control" 
+                      value="admin@nexusops.io" 
+                      readonly 
+                      disabled 
+                      data-testid="settings-email"
+                    >
+                  </div>
+                  <!-- Copy Mail Button -->
+                  <button type="button" id="btn-copy-email" class="btn-secondary" data-testid="btn-copy-email" title="Copy email address to clipboard">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    <span>Copy Mail</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Logged-in Password (Non-editable / Grayed out) -->
+              <div class="form-group">
+                <label class="form-label" for="settings-password">
+                  <span>Password</span>
+                  <span style="font-size: 0.75rem; color: #9CA3AF;">(Read-only)</span>
+                </label>
+                <div class="input-container">
+                  <span class="input-icon">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                  </span>
+                  <input 
+                    type="password" 
+                    id="settings-password" 
+                    class="form-control" 
+                    value="demo123" 
+                    readonly 
+                    disabled 
+                    data-testid="settings-password"
+                  >
+                </div>
+              </div>
+
+              <div style="margin-top: 16px; padding: 14px; background: rgba(255, 255, 255, 0.02); border-radius: var(--radius-md); border: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 0.85rem; color: var(--text-muted);">Session Authenticated At:</span>
+                <span id="settings-login-time" style="font-family: var(--font-mono); font-size: 0.825rem; color: #A5B4FC;">Just now</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Global Toast Notification -->
+  <div id="toast-notification" class="toast-notification" data-testid="toast-notification">
+    <span id="toast-icon">✨</span>
+    <span id="toast-message">Action completed successfully</span>
+  </div>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>

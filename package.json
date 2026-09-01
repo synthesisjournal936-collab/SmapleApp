@@ -1,0 +1,14 @@
+{
+  "name": "ai-automation-test-app",
+  "version": "1.0.0",
+  "description": "Company Management & Testing Application for AI Automation",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.4.2"
+  }
+}
