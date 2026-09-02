@@ -1,12 +1,24 @@
 {
-  "name": "ai-automation-test-app",
+  "name": "nexusops-ai-automation-testbed",
   "version": "1.0.0",
-  "description": "Company Management & Testing Application for AI Automation",
+  "description": "Open-Source, Local-First Company Management & AI Test Automation Application",
   "main": "index.html",
+  "license": "MIT",
+  "keywords": [
+    "open-source",
+    "local-first",
+    "ai-automation",
+    "testing-benchmark",
+    "playwright",
+    "selenium",
+    "cypress"
+  ],
   "scripts": {
+    "start": "vite --open",
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "serve": "npx serve ."
   },
   "devDependencies": {
     "vite": "^5.4.2"
