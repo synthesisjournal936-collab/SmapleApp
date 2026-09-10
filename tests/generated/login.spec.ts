@@ -26,7 +26,7 @@ test('POSITIVE: Logging in with valid credentials reveals the authenticated app 
   await expect(page.locator('#header-user-email')).toHaveText(username);
   await expect(page.getByTestId('login-error')).toBeHidden();
   await expect(page.getByTestId('toast-notification')).toContainText('Signed in successfully');
-  await expect(page.getByTestId('logout') ?? page.locator('#btn-logout')).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Logout' })).toBeVisible();
 });
 
 test('NEGATIVE: Login is rejected when the password is shorter than the minimum length', async ({ page }) => {
