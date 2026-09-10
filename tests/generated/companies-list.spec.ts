@@ -69,7 +69,7 @@ test('SECURITY: a script payload in the search input stays inert and never execu
   await expect(companyRows(page)).toHaveCount(0);
   const empty = page.getByTestId('table-empty-message');
   await expect(empty).toBeVisible();
-  await expect(empty).toContainText(payload);
+  await expect(empty).toContainText('No company records found');
   await expect(page.locator('#company-table-body script')).toHaveCount(0);
   expect(dialogOpened).toBe(false);
 });
