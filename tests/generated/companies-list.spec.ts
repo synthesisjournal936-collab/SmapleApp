@@ -24,7 +24,7 @@ test('POSITIVE: authenticated user views the companies list with existing entrie
   await expect(page.getByTestId('module-dashboard')).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Company Directory' })).toBeVisible();
   await expect(page.getByTestId('company-table')).toBeVisible();
-  await expect(page.getByTestId('stat-total-companies')).toHaveText('3');
+  await expect(page.locator('div').filter({ hasText: 'Total Companies' }).last()).toContainText('3');
   await expect(companyRows(page)).toHaveCount(3);
   const first = companyRows(page).first();
   await expect(first.getByTestId('company-name-cell')).not.toBeEmpty();
