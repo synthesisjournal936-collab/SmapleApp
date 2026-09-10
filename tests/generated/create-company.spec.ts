@@ -38,8 +38,9 @@ await expect(page.locator('#company-table-body tr[data-testid="company-row"]').f
 test('NEGATIVE: submitting the company form with required fields empty is rejected', async ({ page }) => {
 await openForm(page);
 await submitForm(page);
-await expect(page.locator('#company-form-error')).toBeVisible();
-await expect(page.locator('#company-form-error')).toHaveText(REQUIRED_MSG);
+const errorBanner = page.locator('#module-company-form').getByText(REQUIRED_MSG).first();
+await expect(errorBanner).toBeVisible();
+await expect(errorBanner).toHaveText(REQUIRED_MSG);
 await expect(page.locator('#module-company-form')).toBeVisible();
 });
 test('VALIDATION: every required field is enforced with the required-fields message', async ({ page }) => {
@@ -48,8 +49,9 @@ for (const id of REQUIRED) {
 await fillValid(page, `Field ${id} ${Date.now()}`);
 await page.locator(`#${id}`).fill('');
 await submitForm(page);
-await expect(page.locator('#company-form-error')).toBeVisible();
-await expect(page.locator('#company-form-error')).toHaveText(REQUIRED_MSG);
+const errorBanner = page.locator('#module-company-form').getByText(REQUIRED_MSG).first();
+await expect(errorBanner).toBeVisible();
+await expect(errorBanner).toHaveText(REQUIRED_MSG);
 await expect(page.locator('#module-company-form')).toBeVisible();
 await page.locator('#btn-close-form').click();
 await expect(page.locator('#module-company-form')).toBeHidden();
